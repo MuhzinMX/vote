@@ -3,6 +3,7 @@ import AllParties from './AllParties';
 import Cards from './Cards';
 import PartiesGraph from './PartiesGraph';
 import PartiesMap from './PartiesMap';
+import PromotionComponent from './PromotionComponent';
 
 const Main = () => {
   const [graphType, setGraphType] = useState('histogram');
@@ -11,7 +12,6 @@ const Main = () => {
     setGraphType(event.target.value); // Use the selected value from the event
   };
 
-  console.log(graphType);
 
   return (
     <div className="flex justify-between gap-4">
@@ -34,6 +34,8 @@ const Main = () => {
       {/* Charts and Listing */}
       <div className="w-[400px] h-[200px]">
         <AllParties />
+        
+        <PromotionComponent/>
       </div>
     </div>
   );

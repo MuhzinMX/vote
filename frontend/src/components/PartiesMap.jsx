@@ -1,242 +1,145 @@
-import { useState } from 'react';
-import Region from './Region';
+import { useEffect } from 'react';
+import Regions from './maps/Regions';
 
-function PartiesMap() {
-  const [selectRegion, setSelectRegion] = useState(null);
+const labels = ['Maroodijeex', 'Awdal', 'Togdheer', 'Saaxil', 'Sanaag', 'Sool'];
 
-  const handleState = (region) => {
-    setSelectRegion(region);
-  };
-
-  const regions = [
-    {
-      src: '../../assets/images/gobalo/awdal.png',
-      alt: 'Awdal',
-      transform: 'translateY(-581px) scale(0.42) translateX(-321px)',
-      transformHover: 'translateY(-581px) scale(0.44) translateX(-321px)',
-      degmoyinka: [
-        {
-          src: '../../assets/images/degmo/borama.png',
-          alt: 'Borama',
-          transform: 'translateX(-114px) translateY(-510px) scale(0.18)',
-        },
-        {
-          src: '../../assets/images/degmo/salall.png',
-          alt: 'Zeila',
-          transform: ' translateX(-154px) translateY(-598px) scale(0.24)',
-        },
-        {
-          src: '../../assets/images/degmo/lughaya.png',
-          alt: 'Lughaya',
-          transform: 'translateX(-248px) translateY(-572px) scale(0.13)',
-        },
-        {
-          src: '../../assets/images/degmo/baki.png',
-          alt: 'Baki',
-          transform: 'translateX(-160px) translateY(-520px) scale(0.17)',
-        },
-      ],
-    },
-    {
-      src: '../../assets/images/gobalo/mjeex.png',
-      alt: 'M/jeex',
-      transform: 'translateY(-458px) scale(0.358) translateX(-287px)',
-      transformHover: 'translateY(-458px) scale(0.368) translateX(-287px)',
-
-      degmoyinka: [
-        {
-          src: '../../assets/images/degmo/gabilay.png',
-          alt: 'Gabiley',
-          transform: 'translateX(-234px) translateY(-525px) scale(0.2)',
-        },
-        {
-          src: '../../assets/images/degmo/hargeysa.png',
-          alt: 'Hargeysa',
-          transform: 'translateX(-274px) translateY(-520px) scale(0.24)',
-        },
-        {
-          src: '../../assets/images/degmo/salaxley.png',
-          alt: 'Salaxley',
-          transform: 'translateX(-151px) translateY(-442px) scale(0.14)',
-        },
-        {
-          src: '../../assets/images/degmo/bali-gubadle.png',
-          alt: 'Bali-gubadle',
-          transform: 'translateX(-201px) translateY(-451px) scale(0.105)',
-        },
-      ],
-    },
-    {
-      src: '../../assets/images/gobalo/sahil.png',
-      alt: 'Sahil',
-      transform: 'translateY(-557px) scale(0.285) translateX(-306px)',
-      transformHover: 'translateY(-557px) scale(0.305) translateX(-306px)',
-      degmoyinka: [],
-    },
-    {
-      src: '../../assets/images/gobalo/togdheer.png',
-      alt: 'Togdheer',
-      transform: 'translateY(-404px) scale(0.46) translateX(157px)',
-      transformHover: 'translateY(-404px) scale(0.48) translateX(157px)',
-      degmoyinka: [],
-    },
-    {
-      src: '../../assets/images/gobalo/sool.png',
-      alt: 'Sool',
-      transform: 'translateY(-414px) scale(0.47) translateX(397px)',
-      transformHover: 'translateY(-414px) scale(0.49) translateX(397px)',
-      degmoyinka: [],
-    },
-    {
-      src: '../../assets/images/gobalo/sanaag.png',
-      alt: 'Sanaag',
-      transform: 'translateY(-576px) scale(0.47) translateX(388px)',
-      transformHover: 'translateY(-576px) scale(0.49) translateX(388px)',
-      degmoyinka: [],
-    },
-  ];
-
-  const allRegionNames = regions?.map((image) => image.alt);
-
-  const parties = [
+const data = {
+  labels,
+  datasets: [
     {
       label: 'BARWAAQO',
+      data: [900, 850, 900, 800, 750, 650],
       backgroundColor: 'lightgreen',
-      vote: 9000,
     },
     {
       label: 'REJO',
+      data: [900, 850, 900, 800, 750, 650],
       backgroundColor: 'orange',
-      vote: 8000,
     },
     {
       label: 'HORSEED',
+      data: [2000, 1000, 900, 700, 650, 550],
       backgroundColor: 'green',
-      vote: 7000,
     },
     {
       label: 'TALO-WADAAG',
+      data: [800, 500, 600, 600, 550, 250],
       backgroundColor: 'skyblue',
-      vote: 6000,
     },
     {
       label: 'UCID',
+      data: [900, 700, 600, 500, 750, 550],
       backgroundColor: 'pink',
-      vote: 5000,
     },
     {
       label: 'KAAH',
+      data: [3500, 2550, 2500, 1550, 2000, 850],
       backgroundColor: 'red',
-      vote: 4000,
     },
     {
       label: 'HILAAC',
+      data: [800, 500, 1000, 700, 650, 250],
       backgroundColor: 'blue',
-      vote: 3000,
     },
     {
       label: 'SHACABKA',
+      data: [900, 850, 900, 800, 750, 650],
       backgroundColor: 'purple',
-      vote: 2000,
     },
     {
       label: 'WADDANI',
+      data: [4000, 2500, 3000, 1500, 550, 500],
       backgroundColor: 'orange',
-      vote: 2000,
     },
     {
       label: 'KULMIYE',
+      data: [5000, 3000, 1500, 1000, 1000, 1000],
       backgroundColor: 'yellow',
-      vote: 1000,
     },
+  ],
+};
+
+function PartiesMap() {
+  const regions = [
+    { id: 'path47640', name: 'Awdal' },
+    { id: 'path47638', name: 'M/Jeex' },
+    { id: 'path47630', name: 'Sahil' },
+    { id: 'path47636', name: 'Togdheer' },
+    { id: 'path47632', name: 'Sanaag' },
+    { id: 'path47634', name: 'Sool' },
   ];
 
+  useEffect(() => {
+    const colorAssignments = {};
+
+    regions.forEach((region, index) => {
+      const regionVotes = {};
+
+      // Aggregate votes for the current region
+      data.datasets.forEach((party) => {
+        regionVotes[party.label] = party.data[index];
+      });
+
+
+      // Find the party with the highest votes (and handle ties by alphabetical order)
+      const sortedParties = Object.entries(regionVotes).sort(
+        (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+      );
+
+      console.log(sortedParties);
+      // Get the winning party and its votes
+      const winningParty = sortedParties[0];
+      const partyName = winningParty[0];
+      const partyVotes = winningParty[1];
+      const color = data.datasets.find(
+        (party) => party.label === partyName
+      ).backgroundColor;
+
+      // Assign colors and prepare tooltip data
+      colorAssignments[region.id] = {
+        regionName: region.name,
+        partyName: partyName,
+        color: color,
+        votes: partyVotes,
+      };
+
+      // Directly manipulate the DOM
+      const pathElement = document.getElementById(region.id);
+      if (pathElement) {
+        pathElement.style.fill = color; // Set the fill color for the SVG path
+
+        // Add tooltip with the required information
+        pathElement.setAttribute(
+          'title',
+          `GB: ${region.name}, ${partyName}: ${partyVotes.toLocaleString()}`
+        );
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="ml-5 relative">
-      {!allRegionNames?.includes(selectRegion) && (
-        <div className="relative">
-          <img
-            src="../../assets/images/somaliland.svg"
-            alt=""
-            className="opacity-0"
-          />
-          {regions.map((image, index) => (
-            <Region key={index} {...image} handleState={handleState} />
-          ))}
-        </div>
-      )}
-
-      {allRegionNames.includes(selectRegion) && (
-        <div>
-          <p
-            className="text-sm  font-bold shadow-lg w-10 mb-4 "
-            style={{ cursor: 'pointer', position: 'relative', zIndex: 1000 }}
-            onClick={() => handleState(null)}
-          >
-            Back
-          </p>
-          <h1 className="text-2xl font-semibold">Gobalka {selectRegion}</h1>
-
+    <div className="w-[100%] h-[66%] bg-white shadow-md p-4 relative opacity-80 ">
+        <h4 className='font-bold text-center mt-6 mb-3'>Natiijada Dorashada Urarada</h4>
+      <div className="flex flex-wrap justify-center">
+        {data.datasets.map((party) => (
           <div
-            className="relative scale-150  "
-            style={{
-              transform:
-                selectRegion === 'M/jeex'
-                  ? 'translateY(-133px) scale(1.3) translateX(30px)'
-                  : 'none',
-            }}
+            key={party.label}
+            className='flex items-center ml-2'
           >
-            <img
-              src="../../assets/images/map.svg"
-              alt=""
-              className="opacity-0"
+            <div
+              style={{
+                width: '40px',
+                height: '15px',
+                backgroundColor: party.backgroundColor,
+                marginRight: '5px',
+              }}
             />
-            {console.log(selectRegion)}
-            <div className="ml-32 mt-10">
-              {regions
-                .filter((region) => region.alt === selectRegion)[0]
-                .degmoyinka.map((degmoyinka) => (
-                  <Region
-                    key={degmoyinka.alt}
-                    {...degmoyinka}
-                    // handleState={handleState}
-                  />
-                ))}
-            </div>
+            <span className="text-sm"> {party.label}</span>
           </div>
-
-          <table
-            className="table-auto border-collapse border border-gray-300"
-            style={{
-              transform: ' translateX(350px) translateY(-498px)',
-            }}
-          >
-            <thead className="bg-red-700 text-white">
-              <tr>
-                <th className="px-4 py-2 border">Xisbiga</th>
-                <th className="px-4 py-2 border">Codka</th>
-              </tr>
-            </thead>
-            <tbody>
-              {parties.map((dataset, index) => (
-                <tr key={index} className="bg-white">
-                  {/* Color column with a small rectangle */}
-                  <td className="px-4 py-2 border flex ">
-                    <div
-                      className="w-8 h-4 mr-3"
-                      style={{ backgroundColor: dataset.backgroundColor }}
-                    ></div>
-
-                    {dataset.label}
-                  </td>
-                  {/* Label column */}
-                  <td className="px-4 py-2 border">{dataset.vote}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+        ))}
+      </div>
+      <Regions />
     </div>
   );
 }
