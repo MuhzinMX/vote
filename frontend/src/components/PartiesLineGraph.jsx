@@ -8,7 +8,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 ChartJS.register(
   CategoryScale,
@@ -17,7 +19,9 @@ ChartJS.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler,
+  zoomPlugin // Registering the zoom plugin
 );
 
 const options = {
@@ -29,6 +33,18 @@ const options = {
     title: {
       display: true,
       text: 'Natiijada Dorashada Urarada - Line Chart',
+    },
+    zoom: {
+      pan: {
+        enabled: true,
+        mode: 'x', // Allow panning on the x-axis only
+      },
+      zoom: {
+        enabled: true,
+        drag: false, // Allows zooming via scroll
+        mode: 'x', // Only allow zooming along the x-axis
+        speed: 0.1, // Control zoom speed
+      },
     },
   },
 };
@@ -112,9 +128,18 @@ const data = {
 };
 
 const PartiesLineGraph = () => {
+  // Function to reset the zoom level
+  const resetZoom = () => {
+    window.myChart.resetZoom();
+  };
+
   return (
     <div className="w-[100%] h-[100%] bg-white shadow-md p-4">
-      <Line data={data} options={options} />
+      {/* Assigning the chart instance to window.myChart */}
+      <Line data={data} options={options} ref={(ref) => (window.myChart = ref?.chartInstance)} />
+      
+      {/* Button to reset zoom */}
+      <button onClick={resetZoom} className="mt-4 p-2 bg-blue-500 text-white rounded-md">Reset Zoom</button>
     </div>
   );
 };

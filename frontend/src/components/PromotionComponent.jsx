@@ -7,8 +7,7 @@ const PromotionBanner = () => {
         className="w-20 h-auto mr-4"
       />
       <div className="flex flex-col">
-        <h2 className="text-md font-bold">Empower Target Technology </h2>
-        <p className="text-sm text-gray-600">Transforming ideas into reality</p>
+        <h3 className="text-md font-bold">Empower Target Technology </h3>
       </div>
     </div>
   );
