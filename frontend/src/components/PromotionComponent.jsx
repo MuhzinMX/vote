@@ -4,10 +4,10 @@ const PromotionBanner = () => {
       <img
         src="../../assets/logo.jpg"
         alt="Company Logo"
-        className="w-20 h-auto mr-4"
+        className="w-12 h-auto mr-3"
       />
       <div className="flex flex-col">
-        <h3 className="text-md font-bold">Empower Target Technology </h3>
+        <h5 className="text-md font-bold">Empower Target Technology </h5>
       </div>
     </div>
   );
